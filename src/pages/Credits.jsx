@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { setInputValue } from "../redux/actions/userActions";
 
 const Credits = (props) => {
   const handleSubmit = (event) => {
@@ -6,10 +8,10 @@ const Credits = (props) => {
   };
 
   const handleChange = (event) => {
-  
+    props.setInputValue(event);
   };
 
-
+  console.log(props);
 
   return (
     <div className="Credits">
@@ -20,8 +22,8 @@ const Credits = (props) => {
             type="text"
             className="form-control"
             name="name"
-            value=""
-            onChange={handleChange}
+            value={props.users.name}
+            onChange={props.setInputValue}
           />
         </div>
         <div className="form-group">
@@ -31,7 +33,7 @@ const Credits = (props) => {
             className="form-control"
             name="email"
             onChange={handleChange}
-            value=""
+            value={props.users.email}
           />
         </div>
         <div className="form-group">
@@ -39,7 +41,7 @@ const Credits = (props) => {
           <input
             className="form-control"
             onChange={handleChange}
-            value=""
+            value={props.users.DNI}
             name="DNI"
             type="number"
           />
@@ -50,5 +52,8 @@ const Credits = (props) => {
   );
 };
 
-export default Credits;
+const mapStateToProps = ({ usersReducer }) => usersReducer;
 
+const mapDispatchToProps = { setInputValue };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Credits);
