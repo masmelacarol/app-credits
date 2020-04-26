@@ -1,0 +1,30 @@
+.Footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #34373c;
+    height: 80px;
+    &__social-media {
+        display: flex;
+        img {
+            width: 35px;
+            height: 35px;
+        }
+    }
+    &__autor,
+    &__social-media {
+        p,
+        img,
+        span {
+            color: white;
+            text-align: center;
+            margin: 0 5px;
+        }
+        span {
+            margin-left: 20px;
+            text-decoration: underline;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+.Credits {
+    width: 50%;
+    margin: auto;
+    padding-top: 20px;
+    height: 75vh;
+}
+
+@media (max-width: 800px) {
+    .Credits {
+        width: 90%;
+    }
+}
