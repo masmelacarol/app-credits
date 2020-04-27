@@ -81,7 +81,7 @@ export const getAllUsers = () => async(dispatch) => {
 
 export const getUserById = (DNI) => async(dispatch) => {
     try {
-        const response = await fetch(`http://localhost:3001/users/${DNI}`);
+        const response = await fetch(`http://localhost:3001/credits/user/${DNI}`);
         const data = await response.json();
         console.log("getUserById -> data", data)
 

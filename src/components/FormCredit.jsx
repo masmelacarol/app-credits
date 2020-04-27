@@ -17,6 +17,8 @@ const FormCredit = (props) => {
           <div className="form-group">
             <label>Monto a solicitar:</label>
             <input
+              min={10000}
+              max={100000}
               type="text"
               className="form-control"
               name="value"

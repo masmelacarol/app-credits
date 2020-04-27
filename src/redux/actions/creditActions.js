@@ -5,6 +5,7 @@ import {
     GET_CREDITS,
     GET_DENIES_CREDITS,
     GET_TOTAL_VALUE,
+    UPDATE_AMOUNT,
     ERROR,
     LOADING,
 } from '../types/creditTypes';
@@ -39,15 +40,27 @@ export const addCredit = (DNI, credit) => async(dispatch) => {
         })
 
         const data = await response.json();
+        console.log("addCredit -> data", data)
+
+        if (data.body.state) {
+            alert('Su credito fue aprobado');
+            dispatch({
+                type: UPDATE_AMOUNT,
+                payload: data.body.value
+            })
+        } else {
+            alert('Su credito no fue aprobado');
+        }
 
         if (data.error !== "") {
-            console.log("addCredit -> data", data)
             throw new Error(data.error)
-            console.log("addCredit -> data", data)
         }
         dispatch({
             type: ADD_CREDIT,
         })
+
+
+
 
     } catch (error) {
         console.log("addCredit -> error", error)

@@ -25,6 +25,11 @@ const CreditUser = (props) => {
     props.setInputCredits(event);
   };
 
+  const isNotAllowForCredit = () => {
+    let isNotAllow = user.dataByUser.credits.find(credit => credit.state === false);
+    return isNotAllow;
+  }
+
   console.log("CreditUser -> props", props);
   return (
     <React.Fragment>
@@ -57,7 +62,7 @@ const CreditUser = (props) => {
               
             ) : null}
         </div>
-        {user.dataByUser.credits.length === 0 && (
+        {!isNotAllowForCredit() && (
           <div className="creditUser__applyCredit">
             <h2>Solicitar credito</h2>
             <FormCredit

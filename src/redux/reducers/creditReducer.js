@@ -7,6 +7,7 @@ import {
     GET_TOTAL_VALUE,
     GET_DENIES_CREDITS,
     GET_CREDITS,
+    UPDATE_AMOUNT,
     ERROR,
     LOADING,
 } from '../types/creditTypes';
@@ -36,7 +37,6 @@ INITIAL_STATE.PropTypes = {
 }
 
 export default (state = INITIAL_STATE, action) => {
-    console.log("action", action)
     switch (action.type) {
         case SET_INPUT_VALUE:
             return {...state, credits: action.payload, loading: false, error: null }
@@ -48,6 +48,8 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, amount: action.payload, error: null, loading: false }
         case GET_CREDITS:
             return {...state, allCredits: action.payload, error: null, loading: false }
+        case UPDATE_AMOUNT:
+            return {...state, amount: action.payload, error: null, loading: false }
         case LOADING:
             return {...state, loading: true, error: null }
         case ERROR:
