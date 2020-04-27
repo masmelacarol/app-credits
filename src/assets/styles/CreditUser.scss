@@ -2,5 +2,9 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 75vh;
+    min-height: 75vh;
+    &__data {
+        display: flex;
+        flex-direction: column;
+    }
 }

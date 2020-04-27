@@ -24,6 +24,7 @@ const Credits = (props) => {
     if(Object.keys(props.users.DNI).length) {
         await props.addUser(props.users);   
         await props.getAllUsers();
+        await props.getUserById(props.users.DNI);
         console.log(props);
 
         props.history.push(`/credits/${props.users.DNI}`)    

@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getUserById, getAllUsers } from "../redux/actions/userActions";
+import {
+  setInputCredits,
+  addCredit,
+  getAllCreditByUser,
+} from "../redux/actions/creditActions";
 import FormCredit from "../components/FormCredit";
 import "../assets/styles/CreditUser.scss";
 
@@ -10,56 +15,68 @@ const CreditUser = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
-  const handleClick = async() => {
-    await props.getUserById(match.params.id);
-    if (props.user.isUser) {
-      console.log("hola");
-    }
+  const handleClick = async () => {
+    let id = match.params.id;
+    await props.getUserById(id);
+    await props.addCredit(id, props.credit.credits);
   };
 
-  const handleChange = () => {};
+  const handleChange = (event) => {
+    props.setInputCredits(event);
+  };
 
   console.log("CreditUser -> props", props);
   return (
-    <div className="creditUser">
-      <div className="creditUser__perfil">
-        <h2>Perfil</h2>
-        <p className="font-weight-bold">
-          Usuario:{" "}
-          <span className="font-weight-normal">{user.users.name || "NA"} </span>
-        </p>
-        <p className="font-weight-bold">
-          Correo electrónico:{" "}
-          <span className="font-weight-normal">
-            {user.users.email || "NA"}{" "}
-          </span>
-        </p>
-        <p className="font-weight-bold">
-          Cédula:{" "}
-          <span className="font-weight-normal">{user.users.DNI || "NA"} </span>
-        </p>
-      </div>
-      {!user.isUser && (
-        <div className="creditUser__applyCredit">
-          <h2>Solicitar credito</h2>
-          <FormCredit
-            onSubmit={handleSubmit}
-            onClick={handleClick}
-            onChange={handleChange}
-          ></FormCredit>
+    <React.Fragment>
+      <div className="creditUser">
+        <div className="creditUser__perfil">
+          <h2>Perfil</h2>
+          <p className="font-weight-bold">
+            Usuario:{" "}
+            <span className="font-weight-normal">
+              {user.users.name || "NA"}{" "}
+            </span>
+          </p>
+          <p className="font-weight-bold">
+            Correo electrónico:{" "}
+            <span className="font-weight-normal">
+              {user.users.email || "NA"}{" "}
+            </span>
+          </p>
+          <p className="font-weight-bold">
+            Cédula:{" "}
+            <span className="font-weight-normal">
+              {user.users.DNI || "NA"}{" "}
+            </span>
+          </p>
+          {props.user.isUser ? (
+              <button className="btn btn-info mb-2" onClick={() => props.getAllCreditByUser(user.users.DNI)}>
+                {" "}
+                Ver todos los creditos{" "}
+              </button>
+              
+            ) : null}
         </div>
-      )}
-
-      <div className="creditUser__data">
-        {props.user.isUser ? (
-          <React.Fragment>
-            <button> Ver todos los creditos </button>
-            <button> Ver todos los creditos denegados </button>
-            <button> Ver todos los creditos aprobados </button>
-          </React.Fragment>
-        ) : null}
+        {user.dataByUser.credits.length === 0 && (
+          <div className="creditUser__applyCredit">
+            <h2>Solicitar credito</h2>
+            <FormCredit
+              onSubmit={handleSubmit}
+              onClick={handleClick}
+              onChange={handleChange}
+            ></FormCredit>
+          </div>
+        )}
       </div>
-    </div>
+
+      {credit.allCreditsUser.length > 0 && (
+        <FormCredit
+          onSubmit={handleSubmit}
+          onClick={handleClick}
+          onChange={handleChange}
+        ></FormCredit>
+      )}
+    </React.Fragment>
   );
 };
 
@@ -73,6 +90,9 @@ const mapStateToProps = ({ usersReducer, creditReducer }) => {
 const mapDispatchToProps = {
   getAllUsers,
   getUserById,
-}
+  setInputCredits,
+  addCredit,
+  getAllCreditByUser,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreditUser);
