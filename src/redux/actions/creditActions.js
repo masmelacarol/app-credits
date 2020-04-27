@@ -3,7 +3,8 @@ import {
     ADD_CREDIT,
     GET_ALL_CREDITS,
     GET_DENIES_CREDITS,
-    GET_PENDDING_CREDITS
+    GET_PENDDING_CREDITS,
+    GET_TOTAL_VALUE,
 } from '../types/creditTypes';
 import { GET_ALL_USERS } from '../types/userTypes';
 
@@ -73,7 +74,29 @@ export const getAllCreditByUser = (DNI) => async(dispatch) => {
         })
 
     } catch (error) {
-
+        console.log("addCredit -> error", error)
+        dispatch({
+            type: ERROR,
+            payload: 'No se pudo obtener todos los creditos por usuario, intente más tarde'
+        })
     }
+};
 
+export const getTotalCredits = () => async(dispatch) => {
+    try {
+        const response = await fetch('http://localhost:3001/credits/total');
+        const data = await response.json();
+        const total = data.body;
+
+        dispatch({
+            type: GET_TOTAL_VALUE,
+            payload: total,
+        })
+    } catch (error) {
+        console.log("addCredit -> error", error)
+        dispatch({
+            type: ERROR,
+            payload: 'No se pudo obtener el total, intente más tarde'
+        })
+    }
 }

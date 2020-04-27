@@ -4,6 +4,7 @@ import {
     SET_INPUT_VALUE,
     ADD_CREDIT,
     GET_ALL_CREDITS,
+    GET_TOTAL_VALUE,
     GET_DENIES_CREDITS,
     GET_PENDDING_CREDITS
 } from '../types/creditTypes';
@@ -14,6 +15,7 @@ const INITIAL_STATE = {
     allCreditsUser: '',
     creditsDenies: '',
     creditsPedding: '',
+    amount: '',
     credits: {
         value: 0,
         date: '',
@@ -40,6 +42,8 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, error: action.payload, loading: false }
         case GET_ALL_CREDITS:
             return {...state, allCreditsUser: action.payload, error: null, loading: false }
+        case GET_TOTAL_VALUE:
+            return {...state, amount: action.payload, error: null, loading: false }
         default:
             return state;
     }

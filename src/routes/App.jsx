@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import Credits from '../pages/Credits';
@@ -6,8 +6,16 @@ import Layout from '../components/Layout';
 import CreditUser from '../pages/CreditUser';
 import Users from '../pages/Users';
 
+import { connect } from 'react-redux';
+import { getTotalCredits } from '../redux/actions/creditActions';
 
-const App = () => {    
+
+const App = (props) => {  
+  
+  useEffect(()=> {
+    props.getTotalCredits();
+  }, [props])
+  
   return (
     <BrowserRouter>
       <Layout>
@@ -22,4 +30,8 @@ const App = () => {
   );
 }
 
-export default App;
+const mapDispachToProps = {
+  getTotalCredits,
+}
+
+export default connect(null, mapDispachToProps)(App);
