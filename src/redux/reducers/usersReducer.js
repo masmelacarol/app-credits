@@ -41,9 +41,8 @@ export default (state = INITIAL_STATE, action) => {
 }
 
 INITIAL_STATE.PropTypes = {
-    users: {
-        name: PropTypes.string,
-        email: PropTypes.string,
-        DNI: PropTypes.number
-    }
+    users: PropTypes.object,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    DNI: PropTypes.number
 }
