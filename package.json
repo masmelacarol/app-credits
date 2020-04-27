@@ -20,6 +20,7 @@
         "babel-loader": "^8.1.0",
         "babel-polyfill": "^6.26.0",
         "css-loader": "^3.5.2",
+        "dotenv": "^8.2.0",
         "file-loader": "^6.0.0",
         "html-loader": "^1.1.0",
         "html-webpack-plugin": "^4.2.0",
@@ -37,7 +38,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "webpack --mode production",
-        "start": "webpack-dev-server --open --mode development"
+        "start": "webpack-dev-server --open --env.MONTO=1000000 --mode development"
     },
     "keywords": [],
     "author": "",
