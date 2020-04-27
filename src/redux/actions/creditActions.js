@@ -1,10 +1,12 @@
 import {
     SET_INPUT_VALUE,
     ADD_CREDIT,
-    GET_ALL_CREDITS,
-    GET_DENIES_CREDITS,
     GET_PENDDING_CREDITS,
+    GET_CREDITS,
+    GET_DENIES_CREDITS,
     GET_TOTAL_VALUE,
+    ERROR,
+    LOADING,
 } from '../types/creditTypes';
 import { GET_ALL_USERS } from '../types/userTypes';
 
@@ -37,11 +39,6 @@ export const addCredit = (DNI, credit) => async(dispatch) => {
         })
 
         const data = await response.json();
-        console.log("addCredit -> data", data)
-        console.log("addCredit -> data", data)
-        console.log("addCredit -> data", data)
-        console.log("addCredit -> data", data)
-
 
         if (data.error !== "") {
             console.log("addCredit -> data", data)
@@ -61,15 +58,14 @@ export const addCredit = (DNI, credit) => async(dispatch) => {
     }
 }
 
-export const getAllCreditByUser = (DNI) => async(dispatch) => {
+export const getAllPenndingCredits = (DNI) => async(dispatch) => {
     try {
         const response = await fetch(`http://localhost:3001/credits/pendding/user/${DNI}`);
         const data = await response.json();
         const credit = data.body;
-        console.log("getAllCreditByUser -> credit", credit)
 
         dispatch({
-            type: GET_ALL_CREDITS,
+            type: GET_PENDDING_CREDITS,
             payload: credit
         })
 
@@ -77,7 +73,7 @@ export const getAllCreditByUser = (DNI) => async(dispatch) => {
         console.log("addCredit -> error", error)
         dispatch({
             type: ERROR,
-            payload: 'No se pudo obtener todos los creditos por usuario, intente más tarde'
+            payload: 'No se pudo obtener todos los creditos pendientes, intente más tarde'
         })
     }
 };
@@ -97,6 +93,25 @@ export const getTotalCredits = () => async(dispatch) => {
         dispatch({
             type: ERROR,
             payload: 'No se pudo obtener el total, intente más tarde'
+        })
+    }
+}
+
+export const getAllCredits = (DNI) => async(dispatch) => {
+    try {
+        const response = await fetch(`http://localhost:3001/credits/user/${DNI}`);
+        const data = await response.json();
+
+        dispatch({
+            type: GET_CREDITS,
+            payload: data.body
+        })
+
+    } catch (error) {
+        console.log("addCredit -> error", error)
+        dispatch({
+            type: ERROR,
+            payload: 'No se pudo obtener todos los creditos, intente más tarde'
         })
     }
 }

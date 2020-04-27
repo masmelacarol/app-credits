@@ -8,9 +8,9 @@ const FormCredit = (props) => {
   console.log("FormCredit -> props", props);
   return (
     <React.Fragment>
-      {props.allCreditsUser.length ? (
+      {props.creditsPending.length ? (
         <div className="allCredits">
-          <CreditTable allCreditsUser={props.allCreditsUser} paymentButton={true}></CreditTable>
+          <CreditTable allCreditsUser={props.creditsPending} paymentButton={true}></CreditTable>
         </div>
       ) : (
         <form onSubmit={props.onSubmit}>

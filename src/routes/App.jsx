@@ -8,10 +8,11 @@ import Users from '../pages/Users';
 
 import { connect } from 'react-redux';
 import { getTotalCredits } from '../redux/actions/creditActions';
+import AllCredits from '../pages/AllCredits';
 
 
 const App = (props) => {  
-  
+ 
   useEffect(()=> {
     props.getTotalCredits();
   }, [props])
@@ -24,6 +25,7 @@ const App = (props) => {
             <Route exact path="/credits" component={CreditUser}></Route>
             <Route exact path="/credits/:id" component={CreditUser}></Route>
             <Route exact path="/allUsers" component={Users}></Route>
+            <Route exact path="/allCredits/:id" component={AllCredits}></Route>
         </Switch>      
       </Layout>
     </BrowserRouter>

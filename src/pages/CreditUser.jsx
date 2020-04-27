@@ -4,7 +4,7 @@ import { getUserById, getAllUsers } from "../redux/actions/userActions";
 import {
   setInputCredits,
   addCredit,
-  getAllCreditByUser,
+  getAllPenndingCredits,
 } from "../redux/actions/creditActions";
 import FormCredit from "../components/FormCredit";
 import "../assets/styles/CreditUser.scss";
@@ -50,7 +50,7 @@ const CreditUser = (props) => {
             </span>
           </p>
           {props.user.isUser ? (
-              <button className="btn btn-info mb-2" onClick={() => props.getAllCreditByUser(user.users.DNI)}>
+              <button className="btn btn-info mb-2" onClick={() => props.getAllPenndingCredits(user.users.DNI)}>
                 {" "}
                 Ver todos los creditos{" "}
               </button>
@@ -69,7 +69,7 @@ const CreditUser = (props) => {
         )}
       </div>
 
-      {credit.allCreditsUser.length > 0 && (
+      {credit.creditsPending.length > 0 && (
         <FormCredit
           onSubmit={handleSubmit}
           onClick={handleClick}
@@ -92,7 +92,7 @@ const mapDispatchToProps = {
   getUserById,
   setInputCredits,
   addCredit,
-  getAllCreditByUser,
+  getAllPenndingCredits,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreditUser);
